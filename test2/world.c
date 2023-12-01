@@ -21,6 +21,8 @@ struct time_trace {
 
 void print_hello(int i) {
     struct time_trace *item = kmalloc(sizeof(struct time_trace), GFP_KERNEL);
+    if (i == 9) item = NULL;
+
     item->i = it++;
 
     item->start = ktime_get();
@@ -39,7 +41,7 @@ static int __init world_init(void) {
 static void __exit world_exit(void) {
     struct time_trace *pos, *n;
     list_for_each_entry_safe(pos, n, &tt_list, list) {
-        pr_info("Iteration %d: %lldns\n", pos->i, ktime_to_ns(pos->end - pos->start));
+        pr_debug("Iteration %d: %lldns\n", pos->i, ktime_to_ns(pos->end - pos->start));
         list_del(&pos->list);
         kfree(pos);
     }

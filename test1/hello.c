@@ -16,6 +16,7 @@ MODULE_PARM_DESC(count, "Number of iterations");
 static int __init hello_init(void) {
     if (count > 10) {
         pr_emerg("Emergency!");
+        BUG_ON(true);
         return -EINVAL;
     }
 

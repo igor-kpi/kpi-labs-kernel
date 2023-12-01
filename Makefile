@@ -2,6 +2,7 @@ ifneq ($(KERNELRELEASE),)
 
 ccflags-y := -std=gnu11
 ccflags-y += -I$(src)/inc
+ccflags-y += -g -DDYNAMIC_DEBUG_MODULE
 
 obj-m := test1/hello.o test2/world.o
 
